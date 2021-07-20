@@ -1,0 +1,39 @@
+#!/bin/bash
+
+
+USER="consul_exporter"
+GROUP="consul_exporter"
+HOME="/var/lib/consul_exporter"
+DESC="Consul Exporter for Prometheus"
+
+
+
+
+case "$1" in
+  remove)
+    /bin/systemctl stop consul_exporter
+  ;;
+
+  upgrade)
+    /bin/systemctl restart consul_exporter
+  ;;
+
+  purge)
+    /usr/sbin/deluser ${USER}
+    /usr/sbin/delgroup ${GROUP}
+    /bin/rm -fr /etc/default/consul_exporter ${HOME}
+  ;;
+
+  remove|failed-upgrade|abort-install|abort-upgrade|disappear)
+    /bin/systemctl restart consul_exporter
+    exit 0
+  ;;
+
+  *)
+    echo "postrm called with unknown argument \`$1'" >&2
+    exit 1
+  ;;
+
+esac
+
+exit 0

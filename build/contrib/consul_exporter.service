@@ -1,0 +1,22 @@
+[Unit]
+Description=Export Consul service health to Prometheus
+Documentation=https://github.com/prometheus/consul_exporter
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=consul_exporter
+Group=consul_exporter
+Restart=always
+RestartSec=5
+StartLimitInterval=0
+StartLimitBurst=99999
+EnvironmentFile=-/etc/default/consul_exporter
+ExecStart=/usr/bin/consul_exporter $CMD_OPTS
+ExecReload=/bin/kill -HUP $MAINPID
+KillSignal=SIGINT
+StandardOutput=null
+
+[Install]
+WantedBy=multi-user.target
