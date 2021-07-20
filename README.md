@@ -14,7 +14,7 @@ apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EA8AECDE414187
 apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys A57ED69D49D1012A
 printf "deb https://packagecloud.io/the_asten/prometheus/ubuntu/ focal main \ndeb-src https://packagecloud.io/the_asten/prometheus/ubuntu/ focal main" | tee -a /etc/apt/sources.list.d/prometheus.list
 apt-get update
-apt-get install consul_exporter -y
+apt-get install consul-exporter -y
 ```
 
 Special thanks for the ability to use the package repository for open source projects - :rocket: https://packagecloud.io :rocket:
